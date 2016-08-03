@@ -58,4 +58,10 @@ In settings_local.py, add the following lines
 
 Add one logo of the ym backend in static_path/hyperkitty/img/login/ called yourmembership.png
 
+There is one line of buggy code, if you are using mailman-bundler in mailman-bundler/mailman_web/urls.py
+
+    url(r'', include('social.apps.django_app.urls', namespace='social'), {"SSL": True}),
+
+You should delete `, {"SSL": True}` in this line.
+
 All done. Have a test now.
