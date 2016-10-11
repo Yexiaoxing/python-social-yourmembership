@@ -24,7 +24,7 @@ REQUIRES = [
 
 setup(
     name="python-social-yourmembership",
-    version="0.0.1",
+    version="0.0.2",
     description="A plugin of YourMembership SSO, with python-social-auth",
     author='Xiaoxing Ye',
     author_email='ye@xiaoxing.us',
