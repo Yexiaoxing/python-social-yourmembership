@@ -55,14 +55,16 @@ class YourMembershipAuth(BaseAuth):
         
         return parseString(ElementTree.tostring(top)).toprettyxml()
 
-    def call_api(self, _call_method, _session_id="", _call_args={}):
+    def call_api(self, _call_method, _session_id="", _call_args=None):
         """Call YourMembership API."""
+        if _call_args is None:
+            _call_args = {}
         data = self.generate_request_xml(_call_method, _session_id=_session_id, _call_args=_call_args)  # Get the data to post
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}   # Use this content type
     
         response = request("POST", self.YMAPI_SERVLET_URI, headers=headers, data=data)  # Send the request
         
-        xmldoc = self.ElementTree.fromstring(response.text)
+        xmldoc = ElementTree.fromstring(response.text)
         errcode = int(xmldoc.findall("./ErrCode")[0].text)
         ExtendedErrorInfo = xmldoc.findall("./ExtendedErrorInfo")
         errdesc = xmldoc.findall("./ErrDesc")
